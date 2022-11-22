@@ -47,6 +47,7 @@ images.forEach((element) => {
 const divArrey = document.getElementsByClassName("img");
 const smallImgArrey = document.getElementsByClassName("imgSmall");
 
+// cambio immagine su click thumb 
 for (let index = 0; index < smallImgArrey.length; index++) {
     const element = smallImgArrey[index];
     element.addEventListener("click",
@@ -62,12 +63,28 @@ for (let index = 0; index < smallImgArrey.length; index++) {
     
 }
 
+// cambio immagine ogni tre secondi 
+setInterval(function () {
+    if (activeIteam > 0) {
+        divArrey[activeIteam].classList.remove("active");
 
+        activeIteam --;
+
+        divArrey[activeIteam].classList.add("active")
+        
+    } else {
+        divArrey[activeIteam].classList.remove("active");
+        activeIteam = 4;
+        divArrey[activeIteam].classList.add("active")
+    };
+
+}, 3000)
 
 let btnBot = eleId("bot");
 addClass(divArrey[0],"active");
 let btnTop = eleId("top");
 
+// cambio immagine su click bottoni 
 btnTop.addEventListener ("click",
 function top () {   
     
@@ -109,7 +126,3 @@ function () {
 });
 
 
-function thumbClick() {
- console.log("click");
-
-}
