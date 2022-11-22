@@ -35,7 +35,7 @@ img {
     width: 60%;
     height: 450px;
     display: none;
-    
+    position: relative;
 }
 
 .active {
@@ -48,16 +48,37 @@ img {
     position: absolute;
     top: 150px;
     right: 434px;
+    z-index: 10;
 }
 
 
+.title {
 
+    position: absolute;
+    bottom: 165px;
+    right: 44px;
+    color: white;
+    text-align: end;
+    font-size: 70px;
+}
+
+.subTitle {
+
+    position: absolute;
+    bottom: 79px;
+    right: 44px;
+    color: white;
+    text-align: end;
+    width: 912px;
+    font-size: 25px;
+  
+}
 
 #bot {
     position: absolute;
     bottom: 150px;
     right: 434px;
-
+    z-index: 10;
 
 }
 
