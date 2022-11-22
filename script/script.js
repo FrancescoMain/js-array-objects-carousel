@@ -1,4 +1,10 @@
 let activeIteam = 0;
+let start = eleId("start")
+let reset = eleId("reset")
+let timeStart = true;
+let verse = true ;
+
+
 
 const images = [ 
     { image: 'img/01.webp', title: 'Marvel\'s Spiderman Miles Morale', text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.', },
@@ -64,7 +70,7 @@ for (let index = 0; index < smallImgArrey.length; index++) {
 }
 
 // cambio immagine ogni tre secondi 
-setInterval(function () {
+let timer = setInterval(function() {
     if (activeIteam > 0) {
         divArrey[activeIteam].classList.remove("active");
 
@@ -79,6 +85,77 @@ setInterval(function () {
     };
 
 }, 3000)
+
+start.addEventListener("click", 
+function () {
+    if (timeStart) {
+        clearInterval(timer);
+        timeStart = false;
+        start.innerHTML = `<i class="fa-solid fa-play"></i>`
+    }else {
+        timeStart = true;
+        start.innerHTML = `<i class="fa-solid fa-stop"></i>`
+        timer = setInterval(function() {
+            if (activeIteam > 0) {
+                divArrey[activeIteam].classList.remove("active");
+        
+                activeIteam --;
+        
+                divArrey[activeIteam].classList.add("active")
+                
+            } else {
+                divArrey[activeIteam].classList.remove("active");
+                activeIteam = 4;
+                divArrey[activeIteam].classList.add("active")
+            };
+        
+        }, 3000)
+    }
+
+})
+
+reset.addEventListener("click", 
+function () {
+    if (verse) {
+        clearInterval(timer);
+        timer = setInterval(function() {
+            if (activeIteam > 0) {
+                divArrey[activeIteam].classList.remove("active");
+        
+                activeIteam --;
+        
+                divArrey[activeIteam].classList.add("active")
+                
+            } else {
+                divArrey[activeIteam].classList.remove("active");
+                activeIteam = 4;
+                divArrey[activeIteam].classList.add("active")
+            };
+        
+        }, 3000)
+        verse = false;
+    }else {
+        verse = true;
+        clearInterval(timer);
+        timer = setInterval(function() {
+            if (activeIteam < divArrey.length - 1) {
+                divArrey[activeIteam].classList.remove("active");
+        
+                activeIteam ++;
+        
+                divArrey[activeIteam].classList.add("active")
+                
+            } else {
+                divArrey[activeIteam].classList.remove("active");
+                activeIteam = 0;
+                divArrey[activeIteam].classList.add("active")
+            };
+        
+        }, 3000)
+    }
+
+})
+
 
 let btnBot = eleId("bot");
 addClass(divArrey[0],"active");

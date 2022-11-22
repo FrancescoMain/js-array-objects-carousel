@@ -51,6 +51,21 @@ img {
     z-index: 10;
 }
 
+#start{
+    position: absolute;
+    top: 83px;
+    right: 433px;
+    z-index: 10;
+}
+
+#reset{
+    position: absolute;
+    top: 83px;
+    right: 484px;
+    z-index: 10;
+    
+}
+
 
 .title {
 
