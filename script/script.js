@@ -1,3 +1,4 @@
+let activeIteam = 0;
 
 const images = [ 
     { image: 'img/01.webp', title: 'Marvel\'s Spiderman Miles Morale', text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.', },
@@ -9,13 +10,16 @@ const images = [
 
 // inseriamo tutte le immagini dinamicamente servendoci dell’array
 
-
+let divImgSmall = creaEle("div");
+addClass(divImgSmall,"thumb")
 
 images.forEach((element) => {
     // creo elementi per popolare il dom
+
     let cont = eleId("ms_maincont");
     let div = creaEle("div");
     let img = creaEle("img");
+    let imgSmall = creaEle("img");
     let title = creaEle("h2");
     let subTitle = creaEle("p");
 
@@ -23,49 +27,50 @@ images.forEach((element) => {
     addClass(div,"img");
     addClass(title, "title");
     addClass(subTitle, "subTitle");
+    addClass(imgSmall,"imgSmall")
     title.innerHTML = (element.title);
     subTitle.innerHTML = (element.text);
     img.src = (element.image);
+    imgSmall.src = (element.image);
+
    
     // appendo tutto al div container e al dom 
+    divImgSmall.append(imgSmall)
     div.append(img, title,subTitle);
-    cont.append(div);
+    cont.append(div, divImgSmall);
+
+
+
 
 });
 
 const divArrey = document.getElementsByClassName("img");
+const smallImgArrey = document.getElementsByClassName("imgSmall");
 
-let activeIteam = 0;
-
-let btnBot = document.getElementById("bot");
-btnBot.classList.add("hidden")
-divArrey[0].classList.add("active");
-let btnTop = document.getElementById("top");
-btnTop.addEventListener ("click",
-function () {   
-    if (activeIteam < divArrey.length - 1) {
+for (let index = 0; index < smallImgArrey.length; index++) {
+    const element = smallImgArrey[index];
+    element.addEventListener("click",
+    function () {
         divArrey[activeIteam].classList.remove("active");
 
-        activeIteam ++;
+        activeIteam = index;
 
         divArrey[activeIteam].classList.add("active")
         
-    };
-
-    if (activeIteam === divArrey.length - 1) {
-        btnTop.classList.add("hidden");
-    }
-
-    if (activeIteam > 0) {
-        btnBot.classList.remove("hidden");
-        
-    }
+    })
+   
     
-});
+}
 
 
-btnBot.addEventListener ("click",
-function () {   
+
+let btnBot = eleId("bot");
+addClass(divArrey[0],"active");
+let btnTop = eleId("top");
+
+btnTop.addEventListener ("click",
+function top () {   
+    
     if (activeIteam > 0) {
         divArrey[activeIteam].classList.remove("active");
 
@@ -73,16 +78,38 @@ function () {
 
         divArrey[activeIteam].classList.add("active")
         
+    } else {
+        divArrey[activeIteam].classList.remove("active");
+        activeIteam = 4;
+        divArrey[activeIteam].classList.add("active")
     };
 
-    if (activeIteam === 0) {
-        btnBot.classList.add("hidden");
-    }
-
-    if (activeIteam < 4) {
-        btnTop.classList.remove("hidden");
-        
-    }
     
 });
 
+
+btnBot.addEventListener ("click",
+function () {   
+ 
+    if (activeIteam < divArrey.length - 1) {
+        divArrey[activeIteam].classList.remove("active");
+
+        activeIteam ++;
+
+        divArrey[activeIteam].classList.add("active")
+        
+    } else {
+        divArrey[activeIteam].classList.remove("active");
+        activeIteam = 0;
+        divArrey[activeIteam].classList.add("active")
+    };
+
+
+    
+});
+
+
+function thumbClick() {
+ console.log("click");
+
+}
